@@ -5,8 +5,8 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState: filterInitialState,
   reducers: {
-    filterContacts: (_, action) => {
-      return action.payload.toLowerCase();
+    filterContacts(state, action) {
+      state.filter = action.payload.toLowerCase();
     },
   },
 });

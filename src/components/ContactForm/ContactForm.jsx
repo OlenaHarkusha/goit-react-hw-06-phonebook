@@ -1,37 +1,15 @@
-// import PropTypes from 'prop-types';
-// import { useState } from 'react';
+import { addContact } from 'redux/Contacts/contactsSlice';
 import { Button, Form, Input, Label } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 
-export const ContactForm = ({ addContact }) => {
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
-
-  // const handleInput = e => {
-  //   switch (e.target.name) {
-  //     case 'name':
-  //       setName(e.target.value);
-  //       break;
-  //     case 'number':
-  //       setNumber(e.target.value);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   addContact({ name, number });
-  //   setName('');
-  //   setNumber('');
-  // };
+export const ContactForm = () => {
   const { contacts } = useSelector(state => state.contacts);
   console.log(contacts);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
+    const form = e.target;
     const name = e.target.name.value;
     const number = e.target.number.value;
     const normalizedName = name.toLowerCase();
@@ -40,8 +18,8 @@ export const ContactForm = ({ addContact }) => {
       alert(`${name} is already in Contacts`);
       return;
     }
-    dispatch(addContact(name, number));
-    e.targrt.reset();
+    dispatch(addContact({ name, number }));
+    form.reset();
   };
 
   const isInContacts = name => {
@@ -74,7 +52,3 @@ export const ContactForm = ({ addContact }) => {
     </Form>
   );
 };
-
-// ContactForm.propTypes = {
-//   addContact: PropTypes.func.isRequired,
-// };
